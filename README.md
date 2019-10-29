@@ -1,42 +1,19 @@
 FFmpeg README
 =============
+交叉编译ffmpeg指令
+./configure --prefix=/d/opencv3/opencv_contrib/opencv_contrib-3.1.0/zk/ffmpeg-2.7.7//install 
+--enable-shared --disable-static --enable-gpl --enable-memalign-hack 
+--enable-cross-compile --arch=arm --disable-stripping --target-os=qnx --enable-libx264 --enable-libxvid --cc=arm-unknown-nto-qnx6.6.0eabi-gcc.exe --enable-swscale 
+--extra-ldflags=-L/d/opencv3/opencv_contrib/opencv_contrib-3.1.0/zk/ffmpeg-2.7.7/install/lib 
+--extra-cflags=-I/d/opencv3/opencv_contrib/opencv_contrib-3.1.0/zk/ffmpeg-2.7.7/install/include
 
-FFmpeg is a collection of libraries and tools to process multimedia content
-such as audio, video, subtitles and related metadata.
+编译完成之后调用ffmpeg库编译ffmpeg_test.cpp
+ arm-unknown-nto-qnx6.6.0eabi-g++.exe ffmpeg_test.cpp -o FFDemo -I D:\opencv3\opencv_contrib\opencv_contrib\zk\ffmpeg_2_7_7\install\include  -L D:\opencv3\opencv_contrib\opencv_contrib\zk\ffmpeg_2_7_7\install\lib -lavformat -lavcodec -lswscale -lx264 -lxvidcore -lswresample -lavutil -lm -lz 
+-std=c++11
 
-## Libraries
-
-* `libavcodec` provides implementation of a wider range of codecs.
-* `libavformat` implements streaming protocols, container formats and basic I/O access.
-* `libavutil` includes hashers, decompressors and miscellaneous utility functions.
-* `libavfilter` provides a mean to alter decoded Audio and Video through chain of filters.
-* `libavdevice` provides an abstraction to access capture and playback devices.
-* `libswresample` implements audio mixing and resampling routines.
-* `libswscale` implements color conversion and scaling routines.
-
-## Tools
-
-* [ffmpeg](http://ffmpeg.org/ffmpeg.html) is a command line toolbox to
-  manipulate, convert and stream multimedia content.
-* [ffplay](http://ffmpeg.org/ffplay.html) is a minimalistic multimedia player.
-* [ffprobe](http://ffmpeg.org/ffprobe.html) is a simple analysis tool to inspect
-  multimedia content.
-* [ffserver](http://ffmpeg.org/ffserver.html) is a multimedia streaming server
-  for live broadcasts.
-* Additional small tools such as `aviocat`, `ismindex` and `qt-faststart`.
-
-## Documentation
-
-The offline documentation is available in the **doc/** directory.
-
-The online documentation is available in the main [website](http://ffmpeg.org)
-and in the [wiki](http://trac.ffmpeg.org).
-
-### Examples
-
-Coding examples are available in the **doc/examples** directory.
-
-## License
-
-FFmpeg codebase is mainly LGPL-licensed with optional components licensed under
-GPL. Please refer to the LICENSE file for detailed information.
+上面比如-lavformat是include中libavformat。
+在ffmpeg_test.cpp中的头文件中添加#undef  __cplusplus
+头文件如下：
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+#include <libswscale/swscale.h>
