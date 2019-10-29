@@ -8,6 +8,9 @@ FFmpeg README
 --extra-cflags=-I/d/opencv3/opencv_contrib/opencv_contrib-3.1.0/zk/ffmpeg-2.7.7/install/include
 将编译好的x264和libxvid中的lib和include分别放入到ffmpeg中的./install/lib 和./install/include
 
+编译时可能会出错，见https://blog.csdn.net/zk_ken
+
+
 编译完成之后调用ffmpeg库编译ffmpeg_test.cpp
  arm-unknown-nto-qnx6.6.0eabi-g++.exe ffmpeg_test.cpp -o FFDemo -I D:\opencv3\opencv_contrib\opencv_contrib\zk\ffmpeg_2_7_7\install\include  -L D:\opencv3\opencv_contrib\opencv_contrib\zk\ffmpeg_2_7_7\install\lib -lavformat -lavcodec -lswscale -lx264 -lxvidcore -lswresample -lavutil -lm -lz 
 -std=c++11
